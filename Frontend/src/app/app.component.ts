@@ -2,6 +2,7 @@ import { Component } from '@angular/core';import { RouterOutlet } from '@angular
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,18 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
-  title = 'Frontend';
+
+  constructor(private router: Router) {}
+
+  // navigate to plans page
+  goToPlans() {
+    this.router.navigate(['/plans']);
+  }
+
+  // navigate to chats page
+  goToChat(){
+    this.router.navigate(['/chat']);
+  }
 }
