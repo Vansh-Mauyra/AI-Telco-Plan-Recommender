@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ApiService } from '../../services/api.service';
+import { Plan } from '../../../model/plan.model';
 
 @Component({
   selector: 'app-plans',
@@ -16,7 +17,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class PlansComponent implements OnInit {
 
-  plansByCategory: any = {};
+  plansByCategory: { [category: string]: Plan[] } = {};
   categories: string[] = [];
 
   constructor(private api: ApiService) {}

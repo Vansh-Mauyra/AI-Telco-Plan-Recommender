@@ -31,14 +31,14 @@ def root():
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     intent = classify_intent(req.message)
-    if intent == "RECOMMENDATION":
-        result = handle_recommendation(req.message)
-    elif intent == "COMPARISON":
-        # naive: extract ids from text later; for now just FAQ fallback
-        result = handle_faq(req.message)
-        result["type"] = "FAQ"
-    else:
-        result = handle_faq(req.message)
+    # if intent == "RECOMMENDATION":
+    result = handle_recommendation(req.message)
+    # elif intent == "COMPARISON":
+    #     # naive: extract ids from text later; for now just FAQ fallback
+    #     result = handle_faq(req.message)
+    #     result["type"] = "FAQ"
+    # else:
+    #     result = handle_faq(req.message)
 
     return ChatResponse(**result)
 

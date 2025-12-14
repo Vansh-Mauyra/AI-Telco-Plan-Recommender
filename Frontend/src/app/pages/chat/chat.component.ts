@@ -45,12 +45,12 @@ export class ChatComponent {
     ).subscribe(res => {
       if (res) {
       // Combine answer + plans in a single bot message
-      let botText = res.answer || 'No response';
+      let botText = 'Here’s what I found to help you:';
       if (res.plans && res.plans.length) {
         const planText = (res.plans as Plan[])
-          .map(p => `${p.name} - ${p.price}`)
+          .map(p => `${p.plan_name} - ₹${p.monthly_fee}`)
           .join('\n');
-        botText += `\n\nRecommended Plans:\n${planText}`;
+        botText = `\n\nRecommended Plans:\n${planText}`;
       }
 
       this.messages.push({ type: 'bot', text: botText });

@@ -1,11 +1,11 @@
 def categorize_plans(plans, addons):
     categories = {
         "popular": [],
-        "max_saver": [],
-        "unlimited_5g": [],
-        "data_heavy": [],
-        "voice_unlimited": [],
-        "international_roaming": [],
+        "max saver": [],
+        "unlimited 5g": [],
+        "data heavy": [],
+        "voice unlimited": [],
+        "international roaming": [],
         "postpaid": [],
         "annual": [],
         "topup": []
@@ -23,23 +23,23 @@ def categorize_plans(plans, addons):
 
         # Max Saver
         if fee <= 299:
-            categories["max_saver"].append(plan)
+            categories["max saver"].append(plan)
 
         # Unlimited 5G
         if plan["network_type"] in ("5G", "Both") and (data >= 150 or daily >= 2):
-            categories["unlimited_5g"].append(plan)
+            categories["unlimited 5g"].append(plan)
 
         # Data Heavy
         if data >= 100 or daily >= 2:
-            categories["data_heavy"].append(plan)
+            categories["data heavy"].append(plan)
 
         # Voice Unlimited
         if voice >= 3000:
-            categories["voice_unlimited"].append(plan)
+            categories["voice unlimited"].append(plan)
 
         # International Roaming
         if plan["international_roaming"]:
-            categories["international_roaming"].append(plan)
+            categories["international roaming"].append(plan)
 
         # Postpaid
         if plan["plan_type"] == "postpaid":

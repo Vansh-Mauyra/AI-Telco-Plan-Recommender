@@ -1,6 +1,7 @@
 <h2>📦 Available Telco Plans</h2>
 
 <mat-accordion>
+  <!-- Loop through each category -->
   <mat-expansion-panel *ngFor="let category of categories">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -8,11 +9,21 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
+    <!-- Loop through plans under each category -->
     <mat-card *ngFor="let plan of plansByCategory[category]" class="plan-card">
-      <mat-card-title>{{ plan.name }}</mat-card-title>
+      <mat-card-title>{{ plan.plan_name }}</mat-card-title>
       <mat-card-content>
-        <p>{{ plan.description }}</p>
-        <p><b>Price:</b> {{ plan.price }}</p>
+        <p><b>Price:</b> ${{ plan.monthly_fee }}</p>
+        <p><b>Validity:</b> {{ plan.validity_days }} days</p>
+        <p *ngIf="plan.data_gb"><b>Data:</b> {{ plan.data_gb }} GB</p>
+        <p *ngIf="plan.daily_data_gb"><b>Daily Data:</b> {{ plan.daily_data_gb }} GB/day</p>
+        <p *ngIf="plan.voice_minutes"><b>Voice:</b> {{ plan.voice_minutes }} minutes</p>
+        <p *ngIf="plan.sms_count"><b>SMS:</b> {{ plan.sms_count }}</p>
+        <p *ngIf="plan.roaming_included"><b>Roaming included:</b> Yes</p>
+        <p *ngIf="plan.international_roaming"><b>International roaming:</b> Yes</p>
+        <p *ngIf="plan.network_type"><b>Network:</b> {{ plan.network_type }}</p>
+        <p *ngIf="plan.contract_months"><b>Contract:</b> {{ plan.contract_months }} months</p>
+        <p><b>Status:</b> {{ plan.is_active ? 'Active' : 'Inactive' }}</p>
       </mat-card-content>
     </mat-card>
 
