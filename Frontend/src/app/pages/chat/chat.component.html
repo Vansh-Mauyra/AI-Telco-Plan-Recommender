@@ -1,0 +1,26 @@
+<h2>🤖 Telco AI Recommender</h2>
+
+<div class="chat-window">
+  <div *ngFor="let msg of messages">
+    <div [class.user]="msg.from === 'user'"
+         [class.bot]="msg.from === 'bot'">
+      {{ msg.text }}
+    </div>
+
+    <div *ngIf="msg.plans">
+      <mat-card *ngFor="let plan of msg.plans">
+        <mat-card-title>{{ plan.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ plan.description }}</p>
+          <p><b>Price:</b> {{ plan.price }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="input-area">
+  <input matInput [(ngModel)]="input"
+         placeholder="Ask for a plan..." />
+  <button mat-raised-button color="primary" (click)="send()">Send</button>
+</div>

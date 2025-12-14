@@ -1,0 +1,20 @@
+<h2>📦 Available Telco Plans</h2>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let category of categories">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ category | uppercase }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-card *ngFor="let plan of plansByCategory[category]" class="plan-card">
+      <mat-card-title>{{ plan.name }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ plan.description }}</p>
+        <p><b>Price:</b> {{ plan.price }}</p>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-expansion-panel>
+</mat-accordion>
