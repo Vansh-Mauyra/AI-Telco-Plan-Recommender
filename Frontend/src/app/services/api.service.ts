@@ -14,6 +14,7 @@ export class ApiService {
   }
 
   chat(message: string, userId?: string) {
+    console.log('API chat called');
     return this.http.post<any>(`${this.base}/chat`, {
       message,
       user_id: userId

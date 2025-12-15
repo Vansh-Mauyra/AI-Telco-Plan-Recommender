@@ -1,0 +1,78 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;        /* full viewport */
+  margin: 0;
+  overflow: hidden;      /* disable page scrolling */
+  position: relative;
+  background: #f5f5f5;
+}
+
+/* Messages scrollable */
+.messages {
+  flex: 1 1 auto;                /* fill space above input */
+  overflow-y: auto;              /* only messages scroll */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  padding-bottom: 120px;         /* >= input height + 20px extra */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Message bubbles */
+mat-card.user {
+  align-self: flex-end;
+  background-color: #e3f2fd;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+mat-card.bot {
+  align-self: flex-start;
+  background-color: #ffffff;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+/* Fixed input at bottom */
+.input-wrapper {
+  position: fixed;       /* always visible */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px;
+  background: white;
+  border-top: 1px solid #ddd;
+  z-index: 1000;
+}
+
+/* Input field */
+.input-wrapper input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Send button */
+.input-wrapper button {
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.input-wrapper button:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}

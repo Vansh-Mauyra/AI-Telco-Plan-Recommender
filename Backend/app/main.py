@@ -50,17 +50,17 @@ def get_plans():
     return get_all_plans_categorized()
 
 
-@app.post("/recommend", response_model=ChatResponse)
-def recommend(req: RecommendRequest):
-    result = handle_recommendation(req.message, max_results=req.max_results)
-    return ChatResponse(**result)
+# @app.post("/recommend", response_model=ChatResponse)
+# def recommend(req: RecommendRequest):
+#     result = handle_recommendation(req.message, max_results=req.max_results)
+#     return ChatResponse(**result)
 
-@app.post("/compare", response_model=ChatResponse)
-def compare(req: CompareRequest):
-    result = handle_comparison(req.message, req.plan_ids)
-    return ChatResponse(**result)
+# @app.post("/compare", response_model=ChatResponse)
+# def compare(req: CompareRequest):
+#     result = handle_comparison(req.message, req.plan_ids)
+#     return ChatResponse(**result)
 
-@app.post("/faq", response_model=ChatResponse)
-def faq(req: FAQRequest):
-    result = handle_faq(req.message)
-    return ChatResponse(**result)
+# @app.post("/faq", response_model=ChatResponse)
+# def faq(req: FAQRequest):
+#     result = handle_faq(req.message)
+#     return ChatResponse(**result)

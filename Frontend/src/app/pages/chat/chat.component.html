@@ -1,20 +1,15 @@
-<div style="display: flex; flex-direction: column; gap: 10px;">
+<div class="messages" #messagesContainer>
+  <mat-card *ngFor="let msg of messages" [ngClass]="msg.type">
+    <mat-card-content>
+      <strong>{{ msg.type === 'user' ? 'You' : 'AI' }}:</strong><br>
+      {{ msg.text }}
+    </mat-card-content>
+  </mat-card>
+</div>
 
-  <!-- Chat messages -->
-<mat-card *ngFor="let msg of messages" [ngClass]="msg.type">
-  <mat-card-content>
-    <strong>{{ msg.type === 'user' ? 'You' : 'AI' }}:</strong> <br>
-    {{ msg.text }}
-  </mat-card-content>
-</mat-card>
-
-
-  <!-- Input area -->
-  <div style="display: flex; gap: 10px; margin-top: 10px;">
-    <input matInput placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()" style="flex: 1;">
-    <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="loading">
-      {{ loading ? 'Sending...' : 'Send' }}
-    </button>
-  </div>
-
+<div class="input-wrapper">
+  <input placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()">
+  <button (click)="sendMessage()" [disabled]="loading">
+    {{ loading ? 'Sending...' : 'Send' }}
+  </button>
 </div>

@@ -1,10 +1,9 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="app-toolbar">
   <span>Telco AI Recommender</span>
   <span style="flex: 1 1 auto"></span>
   <button mat-button type="button" (click)="goToChat()">Chat</button>
   <button mat-button type="button" (click)="goToPlans()">Plans</button>
 </mat-toolbar>
 
-<div style="padding: 20px;">
-  <router-outlet></router-outlet>
-</div>
+<!-- Router outlet fills remaining page -->
+<router-outlet></router-outlet>
