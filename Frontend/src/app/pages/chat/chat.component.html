@@ -1,4 +1,14 @@
-<div class="messages" #messagesContainer>
+<!-- Initial overlay -->
+<div *ngIf="isInitial" class="initial-overlay">
+  <div class="welcome">
+    Welcome! Ask me anything about plans.
+  </div>
+  <input placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()" class="initial-input">
+  <button (click)="sendMessage()" [disabled]="loading">Send</button>
+</div>
+
+<!-- Chat container -->
+<div class="messages" #messagesContainer *ngIf="!isInitial">
   <mat-card *ngFor="let msg of messages" [ngClass]="msg.type">
     <mat-card-content>
       <strong>{{ msg.type === 'user' ? 'You' : 'AI' }}:</strong><br>
@@ -7,7 +17,8 @@
   </mat-card>
 </div>
 
-<div class="input-wrapper">
+<!-- Fixed input at bottom -->
+<div class="input-wrapper" *ngIf="!isInitial">
   <input placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()">
   <button (click)="sendMessage()" [disabled]="loading">
     {{ loading ? 'Sending...' : 'Send' }}

@@ -27,12 +27,12 @@ export class ChatComponent implements AfterViewChecked {
     { type: 'bot', text: 'Welcome! How can I help you today?' }
   ];
   loading = false;
-  firstMessageSent = false;
+  isInitial = true;
 
   constructor(private api: ApiService) {}
 
   ngAfterViewChecked() {
-    if (this.firstMessageSent) {
+    if (this.isInitial) {
       this.scrollToBottom();
     }
   }
@@ -41,8 +41,8 @@ export class ChatComponent implements AfterViewChecked {
     const msg = this.input.trim();
     if (!msg) return;
 
-    if (!this.firstMessageSent) {
-      this.firstMessageSent = true;
+    if (this.isInitial) {
+      this.isInitial = false;
     }
 
     // Add user message
