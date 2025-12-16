@@ -1,116 +1,193 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;        /* full viewport */
-  margin: 0;
-  overflow: hidden;      /* disable page scrolling */
-  position: relative;
-  background: #f5f5f5;
+  display: block;
+  background: var(--bg-color);
 }
 
-/* Messages scrollable */
+/* Messages area */
 .messages {
-  flex: 1 1 auto;                /* fill space above input */
-  overflow-y: auto;              /* only messages scroll */
+  margin-top: 8px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  padding-bottom: 140px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 16px;
-  padding-bottom: 120px;         /* >= input height + 20px extra */
-  -webkit-overflow-scrolling: touch;
+  gap: 18px;
 }
 
-/* Message bubbles */
-mat-card.user {
+/* Message wrapper */
+.message {
+  display: flex;
+  gap: 12px;
+  max-width: 85%;
+}
+
+/* User & bot alignment */
+.message.user {
   align-self: flex-end;
-  background-color: #e3f2fd;
-  max-width: 70%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  word-wrap: break-word;
+  flex-direction: row-reverse;
 }
 
-mat-card.bot {
+.message.bot {
   align-self: flex-start;
-  background-color: #ffffff;
-  max-width: 70%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  word-wrap: break-word;
 }
 
-/* Fixed input at bottom */
+/* Avatars */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 1px solid var(--border-color);
+}
+
+/* Chat bubbles */
+.bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Bot bubble */
+.message.bot .bubble {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-top-left-radius: 6px;
+}
+
+/* User bubble */
+.message.user .bubble {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    #4f46e5
+  );
+  color: white;
+  border-top-right-radius: 6px;
+}
+
+/* Typing indicator */
+.typing {
+  display: flex;
+  gap: 4px;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  background: var(--secondary-text);
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* Input bar */
 .input-wrapper {
-  position: fixed;       /* always visible */
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 14px 20px;
   display: flex;
-  gap: 10px;
-  padding: 10px 16px;
-  background: white;
-  border-top: 1px solid #ddd;
-  z-index: 1000;
+  gap: 12px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
 }
 
-/* Input field */
 .input-wrapper input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-/* Send button */
 .input-wrapper button {
-  padding: 8px 16px;
-  background-color: #1976d2;
-  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   border: none;
-  border-radius: 4px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 18px;
   cursor: pointer;
 }
 
 .input-wrapper button:disabled {
-  background-color: #90caf9;
-  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Initial overlay */
 .initial-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #f5f5f5;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(37, 99, 235, 0.15),
+    transparent 60%
+  ),
+  var(--bg-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 0 20px;
-}
-
-.initial-overlay .welcome {
-  font-size: 18px;
   text-align: center;
-  color: #666;
+  padding: 20px;
 }
 
-.initial-overlay .initial-input {
-  width: 300px;
-  max-width: 90%;
-  padding: 10px;
+.welcome-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.welcome-sub {
   font-size: 14px;
+  color: var(--secondary-text);
+  max-width: 400px;
 }
 
-.initial-overlay button {
-  padding: 8px 16px;
-  background-color: #1976d2;
+.initial-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.initial-input-wrapper input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
+}
+
+.initial-input-wrapper button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }

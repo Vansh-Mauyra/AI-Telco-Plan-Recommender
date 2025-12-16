@@ -16,6 +16,7 @@ def get_all_plans_categorized():
             p.roaming_included,
             p.international_roaming,
             p.network_type,
+            p.is_active,
             c.carrier_name
         FROM telco_plan p
         JOIN carrier c ON p.carrier_id = c.carrier_id
@@ -31,6 +32,7 @@ def get_all_plans_categorized():
             a.voice_minutes,
             a.sms_count,
             a.validity_days,
+            a.is_active,
             c.carrier_name
         FROM addon a
         JOIN carrier c ON a.carrier_id = c.carrier_id

@@ -15,16 +15,16 @@ INSERT INTO telco_plan
  data_gb, daily_data_gb, voice_minutes, sms_count, network_type)
 VALUES
 -- Airtel
-(1,'Airtel Saver 199','AT199',199,28,'prepaid',25,1,1000,100,'4G'),
-(1,'Airtel Saver 249','AT249',249,28,'prepaid',40,1.5,2000,100,'4G'),
+(1,'Airtel 199','AT199',199,28,'prepaid',25,1,1000,100,'4G'),
+(1,'Airtel  249','AT249',249,28,'prepaid',40,1.5,2000,100,'4G'),
 
 -- Jio
-(2,'Jio Saver 209','J209',209,28,'prepaid',30,1,1500,100,'4G'),
-(2,'Jio Saver 259','J259',259,28,'prepaid',50,1.5,2000,100,'4G'),
+(2,'Jio 209','J209',209,28,'prepaid',30,1,1500,100,'4G'),
+(2,'Jio 259','J259',259,28,'prepaid',50,1.5,2000,100,'4G'),
 
 -- Vi
-(3,'Vi Saver 199','VI199',199,28,'prepaid',24,1,1000,100,'4G'),
-(3,'Vi Saver 299','VI299',299,28,'prepaid',48,1.5,2000,100,'4G');
+(3,'Vi 199','VI199',199,28,'prepaid',24,1,1000,100,'4G'),
+(3,'Vi 299','VI299',299,28,'prepaid',48,1.5,2000,100,'4G');
 INSERT INTO telco_plan (
     carrier_id, plan_name, plan_code, monthly_fee, validity_days, plan_type,
     data_gb, daily_data_gb, voice_minutes, sms_count,
@@ -32,16 +32,16 @@ INSERT INTO telco_plan (
     contract_months, is_active, created_at, updated_at
 ) VALUES
 -- Airtel
-(1,'Airtel Popular 499','AT499',499,28,'prepaid',90,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
-(1,'Airtel Popular 699','AT699',699,56,'prepaid',150,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
+(1,'Airtel 499','AT499',499,28,'prepaid',90,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
+(1,'Airtel 699','AT699',699,56,'prepaid',150,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
 
 -- Jio
-(2,'Jio Popular 449','J449',449,28,'prepaid',84,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
-(2,'Jio Popular 666','J666',666,56,'prepaid',168,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
+(2,'Jio 449','J449',449,28,'prepaid',84,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
+(2,'Jio 666','J666',666,56,'prepaid',168,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
 
 -- Vi
-(3,'Vi Popular 459','VI459',459,28,'prepaid',84,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
-(3,'Vi Popular 701','VI701',701,56,'prepaid',168,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW());
+(3,'Vi 459','VI459',459,28,'prepaid',84,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW()),
+(3,'Vi 701','VI701',701,56,'prepaid',168,2,3000,100,FALSE,FALSE,'5G',0,TRUE,NOW(),NOW());
 INSERT INTO telco_plan (
     carrier_id, plan_name, plan_code, monthly_fee, validity_days, plan_type,
     data_gb, daily_data_gb, voice_minutes, sms_count,
@@ -97,7 +97,7 @@ INSERT INTO customer_profile
 (phone_number, email, name, current_carrier_id, current_plan_id,
  avg_monthly_data_gb, avg_voice_minutes, avg_sms, budget)
 VALUES
--- Budget Saver
+-- Budget 
 ('9876543210','rahul@gmail.com','Rahul Sharma',1,1,18,400,40,299),
 -- Student
 ('9876543211','neha@gmail.com','Neha Verma',2,3,45,800,60,399),
@@ -121,7 +121,7 @@ INSERT INTO usage_history
 VALUES
 
 -- -------------------------
--- Budget Saver (Low usage)
+-- Budget  (Low usage)
 -- -------------------------
 (1, '2025-01-01', 15.2, 380, 35, 0, FALSE),
 (1, '2025-02-01', 17.8, 410, 40, 0, FALSE),

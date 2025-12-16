@@ -1,0 +1,63 @@
+/* Toolbar */
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Spacer */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* App title */
+.app-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  color: #ffffff; /* lock color */
+}
+
+/* Chat page gradient title */
+
+
+/* Nav buttons */
+.app-toolbar button[mat-button] {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* Active page button highlight */
+.app-toolbar button.active-link {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  color: #fff;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+/* Remove Material ripple */
+.theme-toggle .mat-mdc-button-persistent-ripple,
+.theme-toggle .mat-mdc-button-ripple {
+  display: none;
+}
+
+/* Hover for toggle */
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

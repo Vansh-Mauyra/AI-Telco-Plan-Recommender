@@ -1,9 +1,35 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <span>Telco AI Recommender</span>
-  <span style="flex: 1 1 auto"></span>
-  <button mat-button type="button" (click)="goToChat()">Chat</button>
-  <button mat-button type="button" (click)="goToPlans()">Plans</button>
+<mat-toolbar class="app-toolbar">
+  <!-- App Title -->
+  <span class="app-title" [class.chat-title]="isChatPage">
+    Telco AI Recommender
+  </span>
+
+  <span class="spacer"></span>
+
+  <!-- Nav buttons with active highlighting -->
+  <button
+    mat-button
+    routerLink="/chat"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }">
+    Chat
+  </button>
+
+  <button
+    mat-button
+    routerLink="/plans"
+    routerLinkActive="active-link">
+    Plans
+  </button>
+
+  <!-- Theme Toggle -->
+  <button
+    mat-icon-button
+    class="theme-toggle"
+    (click)="toggleTheme()"
+    aria-label="Toggle theme">
+    {{ isDarkMode ? '🌙' : '☀️' }}
+  </button>
 </mat-toolbar>
 
-<!-- Router outlet fills remaining page -->
 <router-outlet></router-outlet>

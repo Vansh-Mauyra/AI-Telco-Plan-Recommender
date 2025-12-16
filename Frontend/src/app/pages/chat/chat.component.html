@@ -1,26 +1,53 @@
 <!-- Initial overlay -->
 <div *ngIf="isInitial" class="initial-overlay">
-  <div class="welcome">
-    Welcome! Ask me anything about plans.
+  <div class="welcome-title">Telco AI Assistant</div>
+  <div class="welcome-sub">
+    Ask me about mobile plans and recommendations.
   </div>
-  <input placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()" class="initial-input">
-  <button (click)="sendMessage()" [disabled]="loading">Send</button>
+
+  <div class="initial-input-wrapper">
+    <input
+      placeholder="Ask about the best plan for you…"
+      [(ngModel)]="input"
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()" [disabled]="loading">Start</button>
+  </div>
 </div>
 
 <!-- Chat container -->
 <div class="messages" #messagesContainer *ngIf="!isInitial">
-  <mat-card *ngFor="let msg of messages" [ngClass]="msg.type">
-    <mat-card-content>
-      <strong>{{ msg.type === 'user' ? 'You' : 'AI' }}:</strong><br>
+  <div
+    *ngFor="let msg of messages"
+    class="message"
+    [ngClass]="msg.type"
+  >
+    <div class="avatar">
+      {{ msg.type === 'user' ? '🧑' : '🤖' }}
+    </div>
+
+    <div class="bubble">
       {{ msg.text }}
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
+
+  <!-- Typing indicator -->
+  <div class="message bot" *ngIf="loading">
+    <div class="avatar">🤖</div>
+    <div class="bubble typing">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </div>
 
 <!-- Fixed input at bottom -->
 <div class="input-wrapper" *ngIf="!isInitial">
-  <input placeholder="Type a message" [(ngModel)]="input" (keyup.enter)="sendMessage()">
+  <input
+    placeholder="Type your message…"
+    [(ngModel)]="input"
+    (keyup.enter)="sendMessage()"
+  />
   <button (click)="sendMessage()" [disabled]="loading">
-    {{ loading ? 'Sending...' : 'Send' }}
+    ➤
   </button>
 </div>

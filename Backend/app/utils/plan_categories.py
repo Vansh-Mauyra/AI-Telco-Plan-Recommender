@@ -6,7 +6,6 @@ def categorize_plans(plans, addons):
         "data heavy": [],
         "voice unlimited": [],
         "international roaming": [],
-        "postpaid": [],
         "annual": [],
         "topup": []
     }
@@ -18,7 +17,7 @@ def categorize_plans(plans, addons):
         voice = plan.get("voice_minutes") or 0
 
         # Popular (balanced plans)
-        if 399 <= fee <= 799 and data >= 100:
+        if 399 <= fee <= 799 and daily >= 2:
             categories["popular"].append(plan)
 
         # Max Saver
@@ -30,7 +29,7 @@ def categorize_plans(plans, addons):
             categories["unlimited 5g"].append(plan)
 
         # Data Heavy
-        if data >= 100 or daily >= 2:
+        if data >= 45 or daily >= 4:
             categories["data heavy"].append(plan)
 
         # Voice Unlimited
@@ -40,10 +39,6 @@ def categorize_plans(plans, addons):
         # International Roaming
         if plan["international_roaming"]:
             categories["international roaming"].append(plan)
-
-        # Postpaid
-        if plan["plan_type"] == "postpaid":
-            categories["postpaid"].append(plan)
 
         # Annual / Long validity
         if plan["validity_days"] >= 365:

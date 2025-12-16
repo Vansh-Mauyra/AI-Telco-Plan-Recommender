@@ -13,4 +13,6 @@ export interface Plan {
   network_type?: '4G' | '5G' | 'Both';
   contract_months?: number;
   is_active?: boolean;
+  price?: number;
+  addon_name?: string;
 }

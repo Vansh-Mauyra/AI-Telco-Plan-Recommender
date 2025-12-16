@@ -1,32 +1,55 @@
-<h2>📦 Available Telco Plans</h2>
+<div class="plans-page">
 
-<!-- Horizontal scrollable category buttons -->
-<div class="category-bar">
-  <button 
-    *ngFor="let category of categories"
-    mat-button
-    [class.selected]="category === selectedCategory"
-    (click)="selectCategory(category)">
-    {{ category | uppercase }}
-  </button>
-</div>
+  <!-- Header section -->
+  <div class="plans-header">
+    <h2 class="page-title">Available Telco Plans</h2>
+    <p class="page-subtitle">
+      Browse and compare plans recommended by Telco AI
+    </p>
+  </div>
 
-<!-- Plans of selected category -->
-<div class="plans-container" *ngIf="selectedCategory">
-  <mat-card *ngFor="let plan of plansByCategory[selectedCategory]" class="plan-card">
-    <mat-card-title>{{ plan.plan_name }}</mat-card-title>
-    <mat-card-content>
-      <p><b>Price:</b> ${{ plan.monthly_fee }}</p>
-      <p><b>Validity:</b> {{ plan.validity_days }} days</p>
-      <p *ngIf="plan.data_gb"><b>Data:</b> {{ plan.data_gb }} GB</p>
-      <p *ngIf="plan.daily_data_gb"><b>Daily Data:</b> {{ plan.daily_data_gb }} GB/day</p>
-      <p *ngIf="plan.voice_minutes"><b>Voice:</b> {{ plan.voice_minutes }} minutes</p>
-      <p *ngIf="plan.sms_count"><b>SMS:</b> {{ plan.sms_count }}</p>
-      <p *ngIf="plan.roaming_included"><b>Roaming included:</b> Yes</p>
-      <p *ngIf="plan.international_roaming"><b>International roaming:</b> Yes</p>
-      <p *ngIf="plan.network_type"><b>Network:</b> {{ plan.network_type }}</p>
-      <p *ngIf="plan.contract_months"><b>Contract:</b> {{ plan.contract_months }} months</p>
-      <p><b>Status:</b> {{ plan.is_active ? 'Active' : 'Inactive' }}</p>
-    </mat-card-content>
-  </mat-card>
+  <!-- Category pills -->
+  <div class="category-bar">
+    <button
+      *ngFor="let category of categories"
+      mat-button
+      class="category-pill"
+      [class.selected]="category === selectedCategory"
+      (click)="selectCategory(category)">
+      {{ category | uppercase }}
+    </button>
+  </div>
+
+  <!-- Plans list -->
+  <div class="plans-container" *ngIf="selectedCategory">
+    <mat-card
+      *ngFor="let plan of plansByCategory[selectedCategory]"
+      class="plan-card">
+
+      <mat-card-title class="plan-title">
+        {{ plan.plan_name || plan.addon_name}}
+      </mat-card-title>
+
+      <mat-card-content>
+        <p><b>Price:</b> ₹{{ plan.monthly_fee || plan.price }}</p>
+        <p><b>Validity:</b> {{ plan.validity_days }} days</p>
+
+        <p *ngIf="plan.daily_data_gb"><b>Daily Data:</b> {{ plan.daily_data_gb }} GB/day</p>
+        <p *ngIf="plan.data_gb"><b>Extra Data:</b> {{ plan.data_gb }} GB</p>
+        <p *ngIf="plan.voice_minutes"><b>Voice:</b> {{ plan.voice_minutes }} mins</p>
+        <p *ngIf="plan.sms_count"><b>SMS:</b> {{ plan.sms_count }}</p>
+
+        <p *ngIf="plan.roaming_included"><b>Roaming:</b> Included</p>
+        <p *ngIf="plan.international_roaming"><b>Intl Roaming:</b> Included</p>
+        <p *ngIf="plan.network_type"><b>Network:</b> {{ plan.network_type }}</p>
+        <p *ngIf="plan.contract_months"><b>Contract:</b> {{ plan.contract_months }} months</p>
+
+        <p class="status">
+          <span class="dot" [class.active]="plan.is_active"></span>
+          {{ plan.is_active ? 'Active' : 'Inactive' }}
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
 </div>

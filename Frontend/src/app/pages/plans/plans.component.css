@@ -1,10 +1,34 @@
-/* Horizontal scrollable category bar */
+/* Page wrapper */
+.plans-page {
+  padding: 20px 24px 32px;
+  background-color: var(--bg-color);
+}
+
+/* Header section */
+.plans-header {
+  margin-bottom: 16px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.page-subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--secondary-text);
+}
+
+/* Category bar */
 .category-bar {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
-  padding: 8px 16px;
-  margin-bottom: 16px;
+  padding: 10px 0 14px;
+  margin-bottom: 20px;
 }
 
 .category-bar::-webkit-scrollbar {
@@ -12,50 +36,85 @@
 }
 
 .category-bar::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(100, 116, 139, 0.4);
   border-radius: 3px;
 }
 
-.category-bar button {
-  flex: 0 0 auto; /* prevent shrinking */
+/* Category pills */
+.category-pill {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 6px 16px;
   font-weight: 600;
-  background-color: #f0f0f0;
-  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
 }
 
-.category-bar button.selected {
-  background-color: #1976d2;
-  color: white;
+.category-pill:hover {
+  background-color: rgba(37, 99, 235, 0.12);
 }
 
-/* Container for plan cards */
+.category-pill.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Plans container */
 .plans-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
 }
 
-/* Plan card styling */
+/* Plan card */
 .plan-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 12px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .plan-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
-mat-card-title {
+/* Title */
+.plan-title {
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
+/* Card content */
 mat-card-content p {
-  margin: 4px 0;
+  margin: 6px 0;
   font-size: 14px;
-  line-height: 1.4;
-  word-wrap: break-word;
+  color: var(--secondary-text);
+}
+
+/* Status */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #9ca3af;
+}
+
+.status .dot.active {
+  background-color: #16a34a;
 }
