@@ -72,16 +72,19 @@ def fetch_usage_summary(customer_id: int):
 # Candidate plans (UPDATED)
 # -------------------------------------------------
 def fetch_candidate_plans(
-    budget: float,
-    min_data: float,
-    min_voice: int = 0,
+    budget: float | None = None,
+    min_data: float | None = None,
+    min_voice: int | None = None,
     needs_roaming: bool = False,
     needs_int_roaming: bool = False,
+    network_type: str | None = None,
+    validity_days: int | None = None,
     limit: int = 20
 ):
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("""
+
+    query = """
         SELECT
             plan_id,
             carrier_id,
@@ -93,25 +96,45 @@ def fetch_candidate_plans(
             sms_count,
             roaming_included,
             international_roaming,
-            network_type
+            network_type,
+            validity_days
         FROM telco_plan
         WHERE is_active = TRUE
-          AND monthly_fee <= %s
-          AND data_gb >= %s
-          AND voice_minutes >= %s
-          AND (%s = FALSE OR roaming_included = TRUE)
-          AND (%s = FALSE OR international_roaming = TRUE)
-        ORDER BY monthly_fee ASC
-        LIMIT %s
-    """, (
-        budget,
-        min_data,
-        min_voice,
-        needs_roaming,
-        needs_int_roaming,
-        limit
-    ))
+    """
 
+    params = []
+
+    if budget is not None:
+        query += " AND monthly_fee <= %s"
+        params.append(budget)
+
+    if min_data is not None:
+        query += " AND (data_gb >= %s OR daily_data_gb * validity_days >= %s)"
+        params.append(min_data)
+        params.append(min_data)
+
+    if min_voice is not None:
+        query += " AND voice_minutes >= %s"
+        params.append(min_voice)
+
+    if needs_roaming:
+        query += " AND roaming_included = TRUE"
+
+    if needs_int_roaming:
+        query += " AND international_roaming = TRUE"
+
+    if network_type:
+        query += " AND network_type = %s"
+        params.append(network_type)
+
+    if validity_days:
+        query += " AND validity_days >= %s"
+        params.append(validity_days)
+
+    query += " LIMIT %s"
+    params.append(limit)
+
+    cur.execute(query, tuple(params))
     rows = cur.fetchall()
     conn.close()
 
@@ -128,7 +151,8 @@ def fetch_candidate_plans(
             "sms_count": int(r[7] or 0),
             "roaming_included": bool(r[8]),
             "international_roaming": bool(r[9]),
-            "network_type": r[10]
+            "network_type": r[10],
+            "validity_days": int(r[11])
         })
 
     return plans

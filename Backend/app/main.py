@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .models import ChatRequest, ChatResponse, RecommendRequest, CompareRequest, FAQRequest
 from .services.intent_service import classify_intent
 from .services.recommend_service import handle_recommendation
+from .services.generic_handler import handle_generic
 from .services.compare_service import handle_comparison
 from .services.faq_service import handle_faq
 from .services.plan_service import get_all_plans_categorized
@@ -31,8 +32,10 @@ def root():
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     intent = classify_intent(req.message)
-    # if intent == "RECOMMENDATION":
-    result = handle_recommendation(req.message)
+    if intent == "RECOMMENDATION":
+        result = handle_recommendation(req.message)
+    else:
+        result = handle_generic(req.message)
     # elif intent == "COMPARISON":
     #     # naive: extract ids from text later; for now just FAQ fallback
     #     result = handle_faq(req.message)

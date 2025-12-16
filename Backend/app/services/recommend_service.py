@@ -40,6 +40,9 @@ def extract_constraints(message: str) -> dict:
             "needs_roaming": False,
             "needs_international_roaming": False,
             "priority": None,
+            "network_type": None,
+            "validity_days": None,
+            "validity_preference": None
         }
 
 
@@ -53,6 +56,8 @@ def query_plans_by_constraints(constraints: dict, limit: int = 20) -> List[dict]
         min_voice=constraints.get("min_voice_minutes") or 0,
         needs_roaming=constraints.get("needs_roaming", False),
         needs_int_roaming=constraints.get("needs_international_roaming", False),
+        network_type=constraints.get("network_type"),
+        validity_days=constraints.get("validity_days"),
         limit=limit
     )
 
@@ -98,6 +103,29 @@ def handle_recommendation(
 
     # Step 1: Extract constraints
     constraints = extract_constraints(message)
+    VALIDITY_MAP = {
+    "short": 28,
+    "medium": 56,
+    "long": 84,
+    "annual": 365
+    }
+
+    DATA_PREFERENCE_MAP = {
+    "high": 120,
+    "medium": 90,        
+    "low": 30
+    }
+
+    if constraints.get("validity_days") is None:
+        pref = constraints.get("validity_preference")
+        if pref in VALIDITY_MAP:
+            constraints["validity_days"] = VALIDITY_MAP[pref]
+    
+    if constraints.get("min_data_gb_per_month") is None:
+        data_pref = constraints.get("data_preference")
+        if data_pref in DATA_PREFERENCE_MAP:
+            constraints["min_data_gb_per_month"] = DATA_PREFERENCE_MAP[data_pref]
+
 
     # Step 2: Fetch candidate plans
     plans = query_plans_by_constraints(

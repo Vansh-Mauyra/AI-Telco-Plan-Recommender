@@ -62,6 +62,10 @@ Extract constraints in this EXACT JSON structure:
   "needs_roaming": boolean,
   "needs_international_roaming": boolean,
   "priority": "data" | "voice" | "balanced" | null
+  "network_type": "5G" | "4G" | null
+  "validity_days": number | null
+  "validity_preference": "short" | "medium" | "long" | "annual" | null
+  "data_preference": "high" | "medium" | "low" | null
 }}
 
 Guidelines:
@@ -163,4 +167,15 @@ Available context (plans / documents):
 
 Answer clearly and concisely.
 Do not add marketing language or speculation.
+"""
+
+GENERIC_SYSTEM_PROMPT = """
+You are a helpful telecom assistant.
+
+Your job:
+- Answer the user's question clearly and correctly
+- Explain concepts, policies, or usage in simple terms
+- Do NOT recommend specific plans unless explicitly asked
+- Do NOT invent pricing or plan details
+- Keep answers concise and user-friendly
 """
